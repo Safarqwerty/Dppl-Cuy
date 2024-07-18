@@ -1,0 +1,38 @@
+{
+  "site": {
+    "title": "TupperwareTa'",
+    "base_url": "https://tupperwareta.vercel.app",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.png",
+    "logo_width": "200",
+    "logo_height": "38",
+    "logo_text": "Astroplate"
+  },
+
+  "settings": {
+    "pagination": 4,
+    "summary_length": 200,
+    "blog_folder": "produk"
+  },
+
+  "nav_button": {
+    "enable": true,
+    "label": "Pesan Sekarang",
+    "link": "/pesan"
+  },
+
+  "params": {
+    "contact_form_action": "",
+    "tag_manager_id": "",
+    "footer_content": "Solusi Pintar untuk Kebutuhan Rumah Tangga Anda",
+    "copyright": "Designed and Developed By [Tupperwareta](https://tupperwareta.vercel.app)"
+  },
+
+  "metadata": {
+    "meta_author": "Themefisher",
+    "meta_image": "/images/og-image.png",
+    "meta_description": "astro boilerplate"
+  }
+}

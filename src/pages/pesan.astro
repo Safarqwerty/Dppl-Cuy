@@ -1,0 +1,90 @@
+---
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { getEntryBySlug } from "astro:content";
+
+const entry = await getEntryBySlug("contact", "index");
+const { contact_form_action } = config.params;
+const { title, description, info } = entry?.data;
+---
+
+<Base title={title} description={description}>
+  <section class="section">
+    <div class="container">
+      <h1 class="text-center font-normal" set:html={markdownify(title)} />
+      <div class="section row pb-0">
+        <div class="col-12 md:col-6 lg:col-7">
+          <form id="contact-form" class="contact-form">
+            <div class="mb-3">
+              <input
+                class="form-input w-full rounded"
+                name="name"
+                type="text"
+                placeholder="Nama anda"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                class="form-input w-full rounded"
+                name="email"
+                type="email"
+                placeholder="Email anda"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                class="form-input w-full rounded"
+                name="subject"
+                type="text"
+                placeholder="Produk yang ingin dipesan"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <textarea
+                class="form-textarea w-full rounded-md"
+                name="message"
+                rows="5"
+                placeholder="Pesan tambahan (warna ataupun jumlahnya)"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Pesan</button>
+          </form>
+        </div>
+        <div class="content col-12 md:col-6 lg:col-5">
+          <h4 set:html={markdownify(info?.title)} />
+          <p class="mt-4" set:html={markdownify(info?.description)} />
+          <ul class="contact-list mt-5 list-none pl-0">
+            {info?.contacts?.map((contact: string) => (
+              <li>
+                <strong class="text-dark" set:html={markdownify(contact)} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = event.target.name.value;
+      const email = event.target.email.value;
+      const subject = event.target.subject.value;
+      const message = event.target.message.value;
+
+      const whatsappNumber = '6281524254515';  // Ganti dengan nomor WhatsApp tujuan
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+        `Assalamu'alaikum saya ingin membeli produk anda\nNama: ${name}\nEmail: ${email}\nProduk: ${subject}\nPesan: ${message}`
+      )}`;
+
+      window.open(whatsappURL, '_blank');
+    });
+  </script>
+</Base>
